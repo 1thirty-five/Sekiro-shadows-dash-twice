@@ -1,22 +1,34 @@
 import pygame
 import sys
 
-pygame.init() # Initializes pygame
-
-pygame.display.set_caption('Ninja Platformer')
-screen = pygame.display.set_mode((640,480)) #provides display screen
-
-clock = pygame.time.Clock()
-
-while True:
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            pygame.QUIT()
-            sys.exit()
+class game:
+    def __init__(self):
     
-    pygame.display.update()
-    clock.tick(60)
-    
+        pygame.init() # Initializes pygame
+        
+        pygame.display.set_caption('Ninja Platformer')
+        self.screen = pygame.display.set_mode((640,480)) #provides display screen
+        self.clock = pygame.time.Clock()
+        
+        #okok
+        
+        self.img = pygame.image.load("data/images/clouds/cloud_1.png")
+        
+    def run(self):
+        while True:
+            self.screen.blit(self.img,(100,200))
+            
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.QUIT()
+                    sys.exit()
+            
+            pygame.display.update()
+            self.clock.tick(60)
+            
+game().run()
+
+
 
 
 
