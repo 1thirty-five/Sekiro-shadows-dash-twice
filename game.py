@@ -1,7 +1,7 @@
 import pygame
 import sys
 from scripts.entities import PhysicsEntity
-from scripts.utils import load_image,load_images1a
+from scripts.utils import load_image,load_images1
 from scripts.tilemap import Tilemap
 from scripts.clouds import Clouds
 
