@@ -26,9 +26,12 @@ class game:
             'stone':load_images1('tiles/stone'),
             'player':load_image('entities/player.png')
             }
+        
         self.player = PhysicsEntity(self, 'player', (50,50), (8,15))#player render
         
         self.tilemap = Tilemap(self, tile_size=16)
+        
+        self.scrol = 
         
     def run(self):
         while True:
@@ -36,7 +39,7 @@ class game:
             
             self.tilemap.render(self.display) 
             
-            self.player.update((self.movement[1] - self.movement[0] ,0))
+            self.player.update(self.tilemap,(self.movement[1] - self.movement[0] ,0))
             self.player.render(self.display)
             
             
@@ -50,6 +53,8 @@ class game:
                         self.movement[0] = True
                     if event.key == pygame.K_d:
                         self.movement[1] = True
+                    if event.key == pygame.K_SPACE:
+                        self.player.velocity[1] = -3    
                 if event.type == pygame.KEYUP:
                     if event.key == pygame.K_a:
                         self.movement[0] = False
