@@ -36,7 +36,7 @@ class game:
             'player/jump': Animation(load_images1('entities/player/jump')),
             'player/slide': Animation(load_images1('entities/player/slide')),
             'player/wall_slide': Animation(load_images1('entities/player/wall_slide')),
-            'particle/leaf': Animation(load_images1('particle/leaf')),
+            'particle/leaf': Animation(load_images1('particles/leaf'), img_dur=20, loop=False),
             }
         
         
@@ -50,6 +50,7 @@ class game:
         
         self.leaf_spawners = []
         for tree in self.tilemap.extract([('large_decor', 2)], keep=True):
+
             self.leaf_spawners.append(pygame.Rect(4 + tree['pos'][0], 4 + tree['pos'][1], 23, 13))
         
         self.particles = []
@@ -98,7 +99,7 @@ class game:
                     if event.key == pygame.K_d:
                         self.movement[1] = True
                     if event.key == pygame.K_SPACE:
-                        self.player.velocity[1] = -3    
+                        self.player.jump()  
                 if event.type == pygame.KEYUP:
                     if event.key == pygame.K_a:
                         self.movement[0] = False

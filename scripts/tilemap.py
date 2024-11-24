@@ -1,9 +1,6 @@
-import pygame
 import json
 
-NEIGHBOR_OFFSETS = [(-1, 0), (-1, -1), (0, -1), (1, -1), (1, 0), (0, 0), (-1, 1), (0, 1), (1, 1)]
-PHYSICS_TILES = {'grass', 'stone'}
-AUTOTILE_TYPES = {'grass', 'stone'}
+import pygame
 
 AUTOTILE_MAP = {
     tuple(sorted([(1, 0), (0, 1)])): 0,
@@ -17,13 +14,17 @@ AUTOTILE_MAP = {
     tuple(sorted([(1, 0), (-1, 0), (0, 1), (0, -1)])): 8,
 }
 
+NEIGHBOR_OFFSETS = [(-1, 0), (-1, -1), (0, -1), (1, -1), (1, 0), (0, 0), (-1, 1), (0, 1), (1, 1)]
+PHYSICS_TILES = {'grass', 'stone'}
+AUTOTILE_TYPES = {'grass', 'stone'}
+
 class Tilemap:
     def __init__(self, game, tile_size=16):
         self.game = game
         self.tile_size = tile_size
         self.tilemap = {}
         self.offgrid_tiles = []
-    
+        
     def extract(self, id_pairs, keep=False):
         matches = []
         for tile in self.offgrid_tiles.copy():
@@ -41,6 +42,8 @@ class Tilemap:
                 matches[-1]['pos'][1] *= self.tile_size
                 if not keep:
                     del self.tilemap[loc]
+        
+        return matches
     
     def tiles_around(self, pos):
         tiles = []
