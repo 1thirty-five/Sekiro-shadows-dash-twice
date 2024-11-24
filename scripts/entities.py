@@ -5,6 +5,7 @@ class PhysicsEntity:
         self.game = game
         self.type = e_type
         self.pos = list(pos)
+        self.size = size
         self.velocity = [0,0]
         
         
@@ -15,5 +16,5 @@ class PhysicsEntity:
         self.pos[0] += frame_movement[1]
         
     def render(self, surf):
-        surf.blit(self.game.asset['player'], self.pos)
+        surf.blit(self.game.assets['player'], self.pos)
         
