@@ -46,6 +46,32 @@ class Game:
             'projectile': load_image('projectile.png'),
         }
         
+        self.sfx = {
+            'jump': pygame.mixer.Sound('data/sfx/jump.wav'),
+            'dash': pygame.mixer.Sound('data/sfx/dash.wav'),
+            'hit': pygame.mixer.Sound('data/sfx/hit.wav'),
+            'shoot': pygame.mixer.Sound('data/sfx/shoot.wav'),
+            'ambience': pygame.mixer.Sound('data/sfx/ambience.wav'),
+            'death': pygame.mixer.Sound('data/sfx/death.wav'),
+            'kill_0': pygame.mixer.Sound('data/sfx/kill_0.wav'),
+            'kill_1': pygame.mixer.Sound('data/sfx/kill_1.wav'),
+            'kill_2': pygame.mixer.Sound('data/sfx/kill_2.wav'),
+            'kill_3': pygame.mixer.Sound('data/sfx/kill_3.wav'),
+            'kill_4': pygame.mixer.Sound('data/sfx/kill_4.wav'),
+            'kill_5': pygame.mixer.Sound('data/sfx/kill_5.wav'),
+            'kill_6': pygame.mixer.Sound('data/sfx/kill_6.wav'),
+            'kill_7': pygame.mixer.Sound('data/sfx/kill_7.wav'),
+            'kill_8': pygame.mixer.Sound('data/sfx/kill_8.wav'),
+        }
+        
+        self.sfx['ambience'].set_volume(0.2)
+        self.sfx['shoot'].set_volume(0.4)
+        self.sfx['hit'].set_volume(0.8)
+        self.sfx['dash'].set_volume(0.3)
+        self.sfx['jump'].set_volume(0.7)
+        self.sfx['death'].set_volume(0.6)
+        
+        
         self.clouds = Clouds(self.assets['clouds'], count=16)
         
         self.player = Player(self, (50, 50), (8, 15))
@@ -80,7 +106,13 @@ class Game:
         self.dead = 0
         self.transition = -30
         
-    def run(self):
+    def run(self): #ACTUAL RENDER FUNCTION !!!!!!!!!!!! do not touch!!!
+        pygame.mixer.music.load('data/music.wav')
+        pygame.mixer.music.set_volume(0.5)
+        pygame.mixer.music.play(-1) # -1 will make it loop forever
+        
+        self.sfx['ambience'].play(-1)
+        
         while True:
             self.display.fill((0, 0, 0, 0))
             self.display_2.blit(self.assets['background'], (0, 0))
@@ -142,6 +174,7 @@ class Game:
                     if self.player.rect().collidepoint(projectile[0]):
                         self.projectiles.remove(projectile)
                         self.dead += 1
+                        self.sfx['death'].play()
                         self.screenshake = max(16, self.screenshake)
                         for i in range(30):
                             angle = random.random() * math.pi * 2
@@ -178,7 +211,8 @@ class Game:
                                 if event.key == pygame.K_d:
                                     self.movement[1] = True
                                 if event.key == pygame.K_SPACE:
-                                    self.player.jump()
+                                    if self.player.jump():
+                                        self.sfx['jump'].play()
                                 if event.key == pygame.K_LSHIFT:
                                     self.player.dash()
                             if event.type == pygame.KEYUP:
