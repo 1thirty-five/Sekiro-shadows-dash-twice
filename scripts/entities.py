@@ -150,7 +150,7 @@ class Player(PhysicsEntity):
         
         self.air_time += 1
         
-        if self.air_time > 120:
+        if self.air_time > 420:
             if not self.game.dead:
                 self.screenshake = max(16,self.screenshake)
             self.game.dead += 1
