@@ -16,7 +16,7 @@ class Game:
     def __init__(self):
         pygame.init()
 
-        pygame.display.set_caption('ninja game')
+        pygame.display.set_caption('SEKIRO : SHADOWS DASH TWICE')
         self.screen = pygame.display.set_mode((640, 480))
         self.display = pygame.Surface((320, 240), pygame.SRCALPHA)
         self.display_2 = pygame.Surface((320, 240))
@@ -102,8 +102,9 @@ class Game:
                 if self.dead > 40:
                     self.load_level(self.level)
             
-            self.scroll[0] += (self.player.rect().centerx - self.display.get_width() / 2 - self.scroll[0])
+            self.scroll[0] += (self.player.rect().centerx - self.display.get_width() / 2 - self.scroll[0]) 
             self.scroll[1] += (self.player.rect().centery - self.display.get_height() / 2 - self.scroll[1]) 
+            render_scroll = (int(self.scroll[0]), int(self.scroll[1]))
             
             for rect in self.leaf_spawners:
                 if random.random() * 49999 < rect.width * rect.height:
