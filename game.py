@@ -37,7 +37,7 @@ class game:
             'player/slide': Animation(load_images1('entities/player/slide')),
             'player/wall_slide': Animation(load_images1('entities/player/wall_slide')),
             'particle/leaf': Animation(load_images1('particles/leaf'), img_dur=20, loop=False),
-            'particle/particle': Animation(load_images1('particles/leaf'), img_dur=6, loop=False),
+            'particle/particle': Animation(load_images1('particles/particle'), img_dur=6, loop=False),
             }
         
         
