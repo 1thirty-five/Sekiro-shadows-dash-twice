@@ -37,6 +37,7 @@ class game:
             'player/slide': Animation(load_images1('entities/player/slide')),
             'player/wall_slide': Animation(load_images1('entities/player/wall_slide')),
             'particle/leaf': Animation(load_images1('particles/leaf'), img_dur=20, loop=False),
+            'particle/particle': Animation(load_images1('particles/leaf'), img_dur=6, loop=False),
             }
         
         
@@ -105,6 +106,8 @@ class game:
                         self.movement[0] = False
                     if event.key == pygame.K_d:
                         self.movement[1] = False
+                    if event.key == pygame.K_LSHIFT:
+                        self.player.dash()
                     
             self.screen.blit(pygame.transform.scale(self.display,self.screen.get_size()), (0,0))
             
